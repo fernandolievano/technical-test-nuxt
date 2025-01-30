@@ -1,7 +1,7 @@
 <template>
   <v-card max-width="600" class="w-100 py-8 px-8">
     <v-card-title>
-      Inciar Sesión
+      <img class="w-100 mx-auto" height="100px" src="~/assets/Logo-Daptee.svg"></img>
     </v-card-title>
 
     <v-card-text>

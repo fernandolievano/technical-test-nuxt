@@ -11,8 +11,10 @@
             :rules="[rules.required]"></v-text-field>
         </div>
         <div class="py-4">
-          <v-text-field v-model="password" label="Contraseña" type="password" prepend-inner-icon="mdi-lock"
-            variant="outlined" :rules="[rules.required]"></v-text-field>
+          <v-text-field v-model="password" label="Contraseña" :type="visible ? 'text' : 'password'"
+            prepend-inner-icon="mdi-lock" variant="outlined" :rules="[rules.required]"
+            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" @click:append-inner="visible = !visible">
+          </v-text-field>
         </div>
 
         <v-alert v-if="errorMessage" type="error" class="mt-2">
@@ -44,6 +46,7 @@ const username = ref('');
 const password = ref('');
 const errorMessage = ref('');
 const loading = ref(false);
+const visible = ref(false);
 
 
 const form: Ref<VForm | null> = ref(null);
@@ -61,7 +64,7 @@ const handleLogin = async () => {
 
   try {
     await login({ username: username.value, password: password.value });
-    router.push('/');
+    router.push('/users');
   } catch (error: any) {
     errorMessage.value = error.message;
   } finally {

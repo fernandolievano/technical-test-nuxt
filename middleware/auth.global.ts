@@ -7,7 +7,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   }
 
   if (user && to.path === '/login') {
-    return navigateTo('/', { replace: true });
+    return navigateTo('/users', { replace: true });
   }
   if (user && to.path === '/logout') {
     authCookie.value = null;

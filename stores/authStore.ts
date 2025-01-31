@@ -13,8 +13,12 @@ export const useAuthStore = defineStore('auth', {
     login(userData: { username: string; password: string; }) {
       const authCookie = useCookie<AuthUser | null>('authUser', { maxAge: 60 * 60 * 24 });
 
-      this.user = { username: userData.username };
-      authCookie.value = this.user;
+      if (userData.username === 'Daptee' && userData.password === 'Daptee2025') {
+        this.user = { username: userData.username };
+        authCookie.value = this.user;
+      } else {
+        throw new Error('Las credenciales no son válidas');
+      }
     },
 
     logout() {

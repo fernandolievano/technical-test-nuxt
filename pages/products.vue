@@ -96,6 +96,10 @@ import { ref } from 'vue';
 import { useProducts } from '~/composables/useProducts';
 import type { Product } from '~/interfaces/products';
 
+useHead({
+  title: 'Productos - Sistema de Gestión'
+});
+
 const confirmDelete = ref(false);
 const productModal = ref(false);
 const selectedProduct = ref<Product | null>(null);

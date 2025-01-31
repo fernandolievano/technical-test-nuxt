@@ -105,6 +105,10 @@ import { ref } from 'vue';
 import { useUsers } from '~/composables/useUsers';
 import type { User } from '~/interfaces/users';
 
+useHead({
+  title: 'Usuarios - Sistema de Gestión'
+});
+
 const confirmDelete = ref(false);
 const userModal = ref(false);
 const selectedUser = ref<User | null>(null);

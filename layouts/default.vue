@@ -34,6 +34,9 @@ import { useAuthStore } from '~/stores/authStore';
 definePageMeta({
   middleware: 'auth.global',
 });
+useHead({
+  title: 'Sistema de Gestión'
+});
 
 const { setUserFromCookie, user } = useAuthStore();
 

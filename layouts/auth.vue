@@ -4,7 +4,6 @@
   </v-app>
 </template>
 
-
 <script setup>
 definePageMeta({
   middleware: 'auth.global',

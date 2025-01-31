@@ -31,13 +31,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import { VForm } from 'vuetify/components';
 import type { Ref } from 'vue';
-import useAuth from '~/composables/useAuth';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '~/stores/authStore';
+
+const { login } = useAuthStore();
 
 const router = useRouter();
-const { login } = useAuth();
 
 const username = ref('');
 const password = ref('');
@@ -59,8 +60,8 @@ const handleLogin = async () => {
   errorMessage.value = '';
 
   try {
-    await login(username.value, password.value);
-    router.push('/users');
+    await login({ username: username.value, password: password.value });
+    router.push('/');
   } catch (error: any) {
     errorMessage.value = error.message;
   } finally {

@@ -12,7 +12,7 @@
   </section>
 </template>
 
-<script>
+<script setup>
 useHead({
   title: 'Iniciar Sesión - Sistema de Gestión'
 });

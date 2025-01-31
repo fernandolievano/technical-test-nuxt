@@ -30,7 +30,8 @@
                 <!-- options list -->
                 <v-list>
                   <v-list-item @click="showUser(user)">Ver usuario</v-list-item>
-                  <v-dialog v-model="confirmDelete" persistent max-width="800">
+                  <!-- delete  -->
+                  <v-dialog v-model="confirmDelete" persistent max-width="600">
                     <template v-slot:activator="{ props: activatorProps }">
                       <v-list-item v-bind="activatorProps">
                         Eliminar usuario
@@ -38,9 +39,10 @@
                     </template>
 
                     <v-card>
+                      <v-card-title>Confirmar acción</v-card-title>
                       <v-card-text>
-                        <p class="text-center">
-                          ¿Realmente deseas eliminar al usuario <b>{{ user.name }}</b> de la lista?
+                        <p>
+                          ¿Realmente deseas eliminar al usuario de la lista?
                         </p>
                       </v-card-text>
                       <template v-slot:actions>
@@ -50,12 +52,13 @@
                           Cancelar
                         </v-btn>
 
-                        <v-btn color="red" @click="deleteUser(user.id)">
+                        <v-btn color="red" variant="elevated" @click="deleteUser(user.id)">
                           Eliminar
                         </v-btn>
                       </template>
                     </v-card>
                   </v-dialog>
+                  <!-- delete  -->
                 </v-list>
                 <!-- options list -->
               </v-menu>
@@ -126,6 +129,6 @@ const showUser = (user: User) => {
 onBeforeRouteLeave(() => {
   usersQuery.value = '';
   const searchInput = document.getElementById('search') as HTMLInputElement;
-  searchInput.value = ''
-})
+  searchInput.value = '';
+});
 </script>

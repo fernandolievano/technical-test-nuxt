@@ -2,7 +2,7 @@
   <v-app-bar color="primary" app class="px-4">
     <v-app-bar-nav-icon class="mr-4" @click="$emit('toggle-menu')" v-if="isMobile" />
 
-    <v-text-field v-model="search" placeholder="Buscar..." append-inner-icon="mdi-magnify" hide-details
+    <v-text-field v-model="search" placeholder="Buscar..." append-inner-icon="mdi-magnify" hide-details id="search"
       density="compact" single-line @input="handleSearch" />
 
     <v-menu class="w-100">

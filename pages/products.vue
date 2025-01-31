@@ -112,4 +112,10 @@ const showProduct = (product: Product) => {
   selectedProduct.value = product;
   productModal.value = true;
 };
+
+onBeforeRouteLeave(() => {
+  productsQuery.value = '';
+  const searchInput = document.getElementById('search') as HTMLInputElement;
+  searchInput.value = ''
+})
 </script>

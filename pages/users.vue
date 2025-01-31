@@ -122,4 +122,10 @@ const showUser = (user: User) => {
   selectedUser.value = user;
   userModal.value = true;
 };
+
+onBeforeRouteLeave(() => {
+  usersQuery.value = '';
+  const searchInput = document.getElementById('search') as HTMLInputElement;
+  searchInput.value = ''
+})
 </script>

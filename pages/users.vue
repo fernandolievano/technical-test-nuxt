@@ -9,57 +9,60 @@
 
     <v-card v-if="loading === 'success' && filteredUsers != null && filteredUsers.length >= 1">
       <h4 class="py-4 px-8" v-show="usersQuery.length >= 1">Buscando "{{ usersQuery }}"</h4>
+
       <v-list lines="two">
-        <v-list-item v-for="user in filteredUsers" :key="user.id">
-          <template v-slot:prepend>
-            <v-avatar icon="mdi-account">
-            </v-avatar>
-          </template>
-          <v-list-item-title>{{ user.name }}</v-list-item-title>
-          <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
+        <v-slide-y-transition group class="py-0 px-0">
+          <v-list-item v-for="user in filteredUsers" :key="user.id">
+            <template v-slot:prepend>
+              <v-avatar icon="mdi-account">
+              </v-avatar>
+            </template>
+            <v-list-item-title>{{ user.name }}</v-list-item-title>
+            <v-list-item-subtitle>{{ user.email }}</v-list-item-subtitle>
 
-          <!-- options button -->
-          <template v-slot:append>
-            <v-menu>
-              <template v-slot:activator="{ props }">
-                <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props"></v-btn>
-              </template>
+            <!-- options button -->
+            <template v-slot:append>
+              <v-menu>
+                <template v-slot:activator="{ props }">
+                  <v-btn icon="mdi-dots-vertical" variant="text" v-bind="props"></v-btn>
+                </template>
 
-              <!-- options list -->
-              <v-list>
-                <v-list-item @click="showUser(user)">Ver usuario</v-list-item>
-                <v-dialog v-model="confirmDelete" persistent max-width="800">
-                  <template v-slot:activator="{ props: activatorProps }">
-                    <v-list-item v-bind="activatorProps">
-                      Eliminar usuario
-                    </v-list-item>
-                  </template>
-
-                  <v-card>
-                    <v-card-text>
-                      <p class="text-center">
-                        ¿Realmente deseas eliminar al usuario <b>{{ user.name }}</b> de la lista?
-                      </p>
-                    </v-card-text>
-                    <template v-slot:actions>
-                      <v-spacer></v-spacer>
-
-                      <v-btn @click="confirmDelete = false">
-                        Cancelar
-                      </v-btn>
-
-                      <v-btn color="red" @click="deleteUser(user.id)">
-                        Eliminar
-                      </v-btn>
+                <!-- options list -->
+                <v-list>
+                  <v-list-item @click="showUser(user)">Ver usuario</v-list-item>
+                  <v-dialog v-model="confirmDelete" persistent max-width="800">
+                    <template v-slot:activator="{ props: activatorProps }">
+                      <v-list-item v-bind="activatorProps">
+                        Eliminar usuario
+                      </v-list-item>
                     </template>
-                  </v-card>
-                </v-dialog>
-              </v-list>
-              <!-- options list -->
-            </v-menu>
-          </template>
-          <!-- options button -->
-        </v-list-item>
+
+                    <v-card>
+                      <v-card-text>
+                        <p class="text-center">
+                          ¿Realmente deseas eliminar al usuario <b>{{ user.name }}</b> de la lista?
+                        </p>
+                      </v-card-text>
+                      <template v-slot:actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn @click="confirmDelete = false">
+                          Cancelar
+                        </v-btn>
+
+                        <v-btn color="red" @click="deleteUser(user.id)">
+                          Eliminar
+                        </v-btn>
+                      </template>
+                    </v-card>
+                  </v-dialog>
+                </v-list>
+                <!-- options list -->
+              </v-menu>
+            </template>
+            <!-- options button -->
+          </v-list-item>
+        </v-slide-y-transition>
       </v-list>
     </v-card>
 

@@ -1,20 +1,26 @@
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer" app temporary v-if="isMobile">
-      <NavigationMenu @close="drawer = false" />
-    </v-navigation-drawer>
+    <v-fade-transition>
+      <template v-if="isReady">
+        <div>
+          <v-navigation-drawer v-model="drawer" app temporary v-if="isMobile">
+            <NavigationMenu @close="drawer = false" />
+          </v-navigation-drawer>
 
-    <v-navigation-drawer v-if="!isMobile" app permanent>
-      <NavigationMenu />
-    </v-navigation-drawer>
+          <v-navigation-drawer v-if="!isMobile" app permanent>
+            <NavigationMenu />
+          </v-navigation-drawer>
 
-    <v-main>
-      <v-container class="fill-height px-0 py-0" fluid>
-        <Navbar @toggle-menu="drawer = !drawer" :isMobile="isMobile" />
+          <v-main>
+            <v-container class="fill-height px-0 py-0" fluid>
+              <Navbar @toggle-menu="drawer = !drawer" :isMobile="isMobile" />
 
-        <slot />
-      </v-container>
-    </v-main>
+              <slot />
+            </v-container>
+          </v-main>
+        </div>
+      </template>
+    </v-fade-transition>
   </v-app>
 </template>
 
@@ -31,10 +37,11 @@ definePageMeta({
 
 const { setUserFromCookie, user } = useAuthStore();
 
-if (!user) useAsyncData('authUser', setUserFromCookie())
+if (!user) useAsyncData('authUser', setUserFromCookie());
 
 const drawer = ref(false);
 const isMobile = ref(false);
+const isReady = ref(false);
 
 const checkScreenSize = () => {
   isMobile.value = window.innerWidth < 960; // Vuetify md breakpoint
@@ -43,5 +50,27 @@ const checkScreenSize = () => {
 onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
+
+  setTimeout(() => {
+    isReady.value = true;
+  }, 50); // little delay to avoid flickering on layout
 });
 </script>
+
+<style>
+.fade-scale-enter-active {
+  animation: fadeScale 0.4s ease-out;
+}
+
+@keyframes fadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+</style>

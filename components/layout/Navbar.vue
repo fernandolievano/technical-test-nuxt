@@ -7,10 +7,10 @@
 
     <v-menu class="w-100">
       <template v-slot:activator="{ props }">
-        <p class="ml-4 mr-2 text-uppercase">
+        <p class="ml-4 mr-2 text-uppercase d-none d-md-block">
           {{ username }}
         </p>
-        <v-btn v-bind="props" icon>
+        <v-btn class="ml-4 ml-md-1" v-bind="props" icon>
           <v-icon>
             mdi-account
           </v-icon>

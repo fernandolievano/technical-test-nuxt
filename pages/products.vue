@@ -10,7 +10,7 @@
     <v-card v-if="loading === 'success' && filteredProducts != null && filteredProducts.length >= 1">
       <h4 class="py-4 px-8" v-show="productsQuery.length >= 1">Buscando "{{ productsQuery }}"</h4>
       <v-list lines="two">
-        <v-slide-y-transition group class="py-0 px-0">
+        <v-slide-y-transition group>
           <v-list-item v-for="product in filteredProducts" :key="product.id">
             <template v-slot:prepend>
               <v-avatar icon="mdi-package-variant">

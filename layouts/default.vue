@@ -15,7 +15,7 @@
             <v-container class="fill-height px-0 py-0" fluid>
               <Navbar @toggle-menu="drawer = !drawer" :isMobile="isMobile" />
 
-              <slot />
+              <NuxtPage />
             </v-container>
           </v-main>
         </div>
@@ -30,10 +30,6 @@ import { ref, onMounted } from 'vue';
 import Navbar from '~/components/layout/Navbar.vue';
 import NavigationMenu from '~/components/layout/NavigationMenu.vue';
 import { useAuthStore } from '~/stores/authStore';
-
-definePageMeta({
-  middleware: 'auth.global',
-});
 useHead({
   title: 'Sistema de Gestión'
 });

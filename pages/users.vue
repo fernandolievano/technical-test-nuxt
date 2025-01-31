@@ -11,7 +11,7 @@
       <h4 class="py-4 px-8" v-show="usersQuery.length >= 1">Buscando "{{ usersQuery }}"</h4>
 
       <v-list lines="two">
-        <v-slide-y-transition group class="py-0 px-0">
+        <v-slide-y-transition group>
           <v-list-item v-for="user in filteredUsers" :key="user.id">
             <template v-slot:prepend>
               <v-avatar icon="mdi-account">

@@ -75,13 +75,13 @@
     </v-alert>
 
     <!-- user modal -->
-    <v-dialog v-model="userModal" max-width="400">
+    <v-dialog v-model="userModal" max-width="600">
       <v-card v-if="selectedUser">
-        <v-card-title class="text-center pt-8 pb-4">
+        <v-card-title class="text-center pt-8 pb-4 px-12">
           <v-icon size="x-large">mdi-account</v-icon>
           <h2>{{ selectedUser.username }}</h2>
         </v-card-title>
-        <v-card-text>
+        <v-card-text class="px-12">
           <p><strong>Nombre:</strong> {{ selectedUser.name }}</p>
           <p><strong>Email:</strong> {{ selectedUser.email }}</p>
           <p><strong>Teléfono:</strong> {{ selectedUser.phone }}</p>

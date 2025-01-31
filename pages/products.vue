@@ -80,7 +80,7 @@
     <!-- product modal -->
     <v-dialog v-model="productModal" max-width="600">
       <v-card v-if="selectedProduct">
-        <v-img :src="selectedProduct.image" class="w-100 mt-8 mb-4" height="200" loading="lazy"></v-img>
+        <v-img :src="selectedProduct.image" class="w-75 mt-8 mb-4 mx-auto" height="200" loading="lazy"></v-img>
         <v-card-text class="px-12">
           <h2 class="pb-4">{{ selectedProduct.title }}</h2>
           <p><strong>Precio:</strong> ${{ selectedProduct.price }}</p>

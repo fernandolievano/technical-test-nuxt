@@ -28,12 +28,14 @@
 import { ref, computed } from 'vue';
 import { useAuthStore } from '~/stores/authStore';
 import { useUsers } from '~/composables/useUsers';
+import { useProducts } from '~/composables/useProducts';
 
 defineProps<{
   isMobile: boolean;
 }>();
 
 const { usersQuery } = useUsers();
+const { productsQuery } = useProducts();
 const search = ref('');
 const router = useRouter();
 const authStore = useAuthStore();
@@ -53,6 +55,8 @@ const handleSearch = () => {
   // ? this may be improved
   if (path === '/users') {
     usersQuery.value = search.value;
+  } if (path === '/products') {
+    productsQuery.value = search.value;
   }
 };
 </script>

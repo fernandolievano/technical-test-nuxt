@@ -1,9 +1,8 @@
 import { useAsyncData } from '#app';
-import { ref } from 'vue';
 import type { User } from '~/interfaces/users';
 
 export function useUsers() {
-  const searchQuery = ref<String>('');
+  const usersQuery = useState<String>('usersQuery', () => '');
   const { data: users, status: loading, error, refresh } = useAsyncData<User[]>(
     'users',
     async () => {
@@ -17,10 +16,11 @@ export function useUsers() {
   );
 
   const filteredUsers = computed(() => {
-    const query = searchQuery.value.toLowerCase();
+    const query = usersQuery.value.toLowerCase();
     const fields = ['name', 'email', 'username'] as const;
 
     if (!users.value) return [];
+    if (query === '') return users.value;
     return users.value.filter(user => fields.some(key => user[key].toLowerCase().includes(query)));
   });
 
@@ -31,6 +31,6 @@ export function useUsers() {
   };
 
   return {
-    users, loading, error, refresh, searchQuery, filteredUsers, deleteUser
+    users, loading, error, refresh, usersQuery, filteredUsers, deleteUser
   };
 }

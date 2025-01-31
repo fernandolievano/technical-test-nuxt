@@ -1,13 +1,16 @@
 <template>
-  <section class="px-8 py-4 w-100">
+  <section class="px-8 py-4 w-100 fill-height">
     <h1 class="mb-4">Usuarios</h1>
 
-    <v-skeleton-loader v-if="loading === 'pending'" height="400" type="list-item-two-line" class="mt-4">
-    </v-skeleton-loader>
+    <v-card v-if="loading === 'pending'">
+      <v-skeleton-loader v-for="i in 6" :key="i" height="100" type="list-item-two-line" class="mt-4">
+      </v-skeleton-loader>
+    </v-card>
 
-    <v-card v-if="loading === 'success' && users != null && users.length >= 1">
+    <v-card v-if="loading === 'success' && filteredUsers != null && filteredUsers.length >= 1">
+      <h4 class="py-4 px-8" v-show="usersQuery.length >= 1">Buscando "{{ usersQuery }}"</h4>
       <v-list lines="two">
-        <v-list-item v-for="user in users" :key="user.id">
+        <v-list-item v-for="user in filteredUsers" :key="user.id">
           <template v-slot:prepend>
             <v-avatar icon="mdi-account">
             </v-avatar>
@@ -60,6 +63,14 @@
       </v-list>
     </v-card>
 
+
+    <v-alert v-if="loading === 'success' && filteredUsers != null && filteredUsers.length === 0" type="info">
+      No hay usuarios para mostrar.
+    </v-alert>
+    <v-alert v-if="error" type="error" dismissible>
+      Hubo un error al traer los datos, intente de nuevo más tarde.
+    </v-alert>
+
     <!-- user modal -->
     <v-dialog v-model="userModal" max-width="400">
       <v-card v-if="selectedUser">
@@ -98,7 +109,7 @@ const confirmDelete = ref(false);
 const userModal = ref(false);
 const selectedUser = ref<User | null>(null);
 
-const { users, loading, error, searchQuery, filteredUsers, deleteUser } = useUsers();
+const { loading, error, usersQuery, filteredUsers, deleteUser } = useUsers();
 
 const showUser = (user: User) => {
   selectedUser.value = user;

@@ -22,6 +22,12 @@ export const useAuthStore = defineStore('auth', {
 
       this.user = null;
       authCookie.value = null;
+    },
+
+    setUserFromCookie() {
+      const authCookie = useCookie<AuthUser | null>('authUser');
+
+      this.user = authCookie.value;
     }
   }
 });

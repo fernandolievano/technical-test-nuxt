@@ -21,6 +21,7 @@
         </div>
       </template>
     </v-fade-transition>
+    <NuxtLoadingIndicator />
   </v-app>
 </template>
 

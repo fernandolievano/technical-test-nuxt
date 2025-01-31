@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <NuxtPage />
+    <NuxtLoadingIndicator />
   </v-app>
 </template>
 

@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <!-- Drawer (Menú Lateral) -->
     <v-navigation-drawer v-model="drawer" app temporary v-if="isMobile">
       <NavigationMenu @close="drawer = false" />
     </v-navigation-drawer>
@@ -11,10 +10,8 @@
 
     <v-main>
       <v-container class="fill-height px-0 py-0" fluid>
-        <!-- Header -->
         <Navbar @toggle-menu="drawer = !drawer" :isMobile="isMobile" />
 
-        <!-- Contenido Dinámico -->
         <slot />
       </v-container>
     </v-main>

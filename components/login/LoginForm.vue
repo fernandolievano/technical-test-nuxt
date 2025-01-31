@@ -61,7 +61,7 @@ const handleLogin = async () => {
 
   try {
     await login({ username: username.value, password: password.value });
-    router.push('/');
+    router.push('/users');
   } catch (error: any) {
     errorMessage.value = error.message;
   } finally {

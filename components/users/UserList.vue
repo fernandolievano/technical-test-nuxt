@@ -19,33 +19,11 @@
             <!-- options list -->
             <v-list>
               <v-list-item @click="showUser(user)">Ver usuario</v-list-item>
-              <!-- delete  -->
-              <v-dialog v-model="confirmDelete" persistent max-width="600">
-                <template v-slot:activator="{ props: activatorProps }">
-                  <v-list-item v-bind="activatorProps" @click="confirmDelete = true">
-                    Eliminar usuario
-                  </v-list-item>
-                </template>
-
-                <v-card>
-                  <v-card-title>Confirmar acción</v-card-title>
-                  <v-card-text>
-                    <p>
-                      ¿Realmente deseas eliminar al usuario de la lista?
-                    </p>
-                  </v-card-text>
-                  <template v-slot:actions>
-                    <v-spacer></v-spacer>
-                    <v-btn @click="confirmDelete = null">
-                      Cancelar
-                    </v-btn>
-                    <v-btn color="red" variant="elevated" @click="handleDeleteUser(user.id)">
-                      Eliminar
-                    </v-btn>
-                  </template>
-                </v-card>
-              </v-dialog>
-              <!-- delete  -->
+              <ConfirmDelete
+                message="¿Realmente deseas eliminar este usuario de la lista?"
+                buttonLabel="Eliminar Usuario"
+                @confirm="handleDeleteUser(user.id)"
+               />
             </v-list>
             <!-- options list -->
           </v-menu>
@@ -86,6 +64,7 @@
 <script lang="ts" setup>
 import type { PropType } from 'vue';
 import type { User } from '~/interfaces/users';
+import ConfirmDelete from '~/components/shared/ConfirmDelete.vue';
 
 const props = defineProps({
   filteredUsers: {
@@ -99,7 +78,6 @@ const props = defineProps({
 });
 
 
-const confirmDelete = ref<boolean>(null);
 const userModal = ref(false);
 const selectedUser = ref<User | null>(null);
 
@@ -108,9 +86,8 @@ const showUser = (user: User) => {
   userModal.value = true;
 };
 const handleDeleteUser = (id: number) => {
-  if (confirmDelete.value) {
+  if (id != null) {
     props.deleteUser(id);
-    confirmDelete.value = false;
   }
 };
 </script>
